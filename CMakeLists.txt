@@ -31,7 +31,7 @@ nanobind_add_stub(
   INCLUDE_PRIVATE
 )
 
-include_directories(${CMAKE_SOURCE_DIR}/src/c/imgui)
+#include_directories(${CMAKE_SOURCE_DIR}/src/c/imgui)
 
 install(TARGETS consgfx_ext LIBRARY DESTINATION consgfx)
 install(FILES "${CMAKE_SOURCE_DIR}/src/consgfx/consgfx_ext.pyi" DESTINATION consgfx)

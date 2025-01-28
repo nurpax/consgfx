@@ -3,9 +3,9 @@ requires = ["scikit-build-core >=0.4.3", "nanobind@git+https://github.com/wjakob
 build-backend = "scikit_build_core.build"
 
 [project]
-name = "slimgui"
+name = "consgfx"
 version = "0.0.1-post1"
-description = "Python Dear ImGui bindings built with Nanobind"
+description = "Text UI image viewing bindings for Kitty/iTerm/libsixel"
 readme = "README.md"
 requires-python = ">=3.8"
 authors = [
@@ -16,7 +16,7 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/nurpax/slimgui"
+Homepage = "https://github.com/nurpax/consgfx"
 
 
 [tool.scikit-build]
