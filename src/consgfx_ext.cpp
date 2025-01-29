@@ -5,6 +5,7 @@
 #include "sixel.h"
 
 namespace nb = nanobind;
+using namespace nb::literals;
 
 struct Outbuf {
     size_t size;
@@ -43,5 +44,6 @@ static nb::bytes sixel_encode_bytes(nb::bytes src_pixels, int width, int height)
 }
 
 NB_MODULE(consgfx_ext, m) {
-    m.def("sixel_encode_bytes", &sixel_encode_bytes);
+    m.def("sixel_encode_bytes", &sixel_encode_bytes, "pixel_data"_a, "width"_a, "height"_a,
+        "Encode 'pixel_data' RGB data (3 bytes per pixel) into sixels format.");
 }
