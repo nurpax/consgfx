@@ -4,7 +4,7 @@ build-backend = "scikit_build_core.build"
 
 [project]
 name = "consgfx"
-version = "0.0.1"
+version = "0.0.2"
 description = "Python console graphics display with Sixels and Kitty"
 readme = "README.md"
 requires-python = ">=3.8"
