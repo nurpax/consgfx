@@ -25,11 +25,8 @@
 #ifndef LIBSIXEL_SIXEL_H
 #define LIBSIXEL_SIXEL_H
 
-#ifdef _WIN32
-# define SIXELAPI __declspec(dllexport)
-#else
-# define SIXELAPI
-#endif
+// Always libsixel for static linking directly into the python extension
+#define SIXELAPI
 
 #define LIBSIXEL_VERSION "1.10.5"
 #define PACKAGE_VERSION LIBSIXEL_VERSION
@@ -594,12 +591,6 @@ sixel_output_new(
     sixel_allocator_t       /* in */  *allocator);  /* allocator, null if you use
                                                        default allocator */
 
-/* deprecated: create an output object */
-SIXELAPI __attribute__((deprecated)) sixel_output_t *
-sixel_output_create(
-    sixel_write_function /* in */ fn_write, /* callback for output sixel */
-    void                 /* in */ *priv);   /* private data given as
-                                               3rd argument of fn_write */
 /* destroy output context object */
 SIXELAPI void
 sixel_output_destroy(sixel_output_t /* in */ *output); /* output context */
@@ -687,10 +678,6 @@ sixel_dither_new(
     sixel_allocator_t   /* in */    *allocator); /* allocator, null if you use
                                                     default allocator */
 
-/* create dither context object */
-SIXELAPI __attribute__((deprecated)) sixel_dither_t *
-sixel_dither_create(int /* in */ ncolors); /* number of colors */
-
 /* get built-in dither context object */
 SIXELAPI sixel_dither_t *
 sixel_dither_get(int builtin_dither); /* ID of built-in dither object */
@@ -733,10 +720,6 @@ sixel_dither_get_num_of_palette_colors(
 /* get number of histogram colors */
 SIXELAPI int
 sixel_dither_get_num_of_histogram_colors(
-    sixel_dither_t /* in */ *dither);  /* dither context object */
-
-SIXELAPI __attribute__((deprecated)) int /* typoed! remains for compatibility. */
-sixel_dither_get_num_of_histgram_colors(
     sixel_dither_t /* in */ *dither);  /* dither context object */
 
 /* get palette */
@@ -813,17 +796,6 @@ sixel_decode_raw(
     unsigned char       /* out */ **palette,    /* ARGB palette */
     int                 /* out */ *ncolors,     /* palette size (<= 256) */
     sixel_allocator_t   /* in */  *allocator);  /* allocator object or null */
-
-SIXELAPI __attribute__((deprecated)) SIXELSTATUS
-sixel_decode(
-    unsigned char            /* in */  *sixels,    /* sixel bytes */
-    int                      /* in */  size,       /* size of sixel bytes */
-    unsigned char            /* out */ **pixels,   /* decoded pixels */
-    int                      /* out */ *pwidth,    /* image width */
-    int                      /* out */ *pheight,   /* image height */
-    unsigned char            /* out */ **palette,  /* RGBA palette */
-    int                      /* out */ *ncolors,   /* palette size (<= 256) */
-    sixel_allocator_function /* in */  fn_malloc); /* malloc function */
 
 #ifdef __cplusplus
 }
@@ -925,10 +897,6 @@ sixel_frame_new(
     sixel_frame_t       /* out */ **ppframe,    /* frame object to be created */
     sixel_allocator_t   /* in */  *allocator);  /* allocator, null if you use
                                                    default allocator */
-/* deprecated version of sixel_frame_new() */
-SIXELAPI __attribute__((deprecated)) sixel_frame_t *
-sixel_frame_create(void);
-
 /* increase reference count of frame object (thread-unsafe) */
 SIXELAPI void
 sixel_frame_ref(sixel_frame_t /* in */ *frame);
@@ -1068,10 +1036,6 @@ sixel_encoder_new(
     sixel_allocator_t   /* in */  *allocator); /* allocator, null if you use
                                                   default allocator */
 
-/* deprecated version of sixel_decoder_new() */
-SIXELAPI __attribute__((deprecated)) sixel_encoder_t *
-sixel_encoder_create(void);
-
 /* increase reference count of encoder object (thread-unsafe) */
 SIXELAPI void
 sixel_encoder_ref(sixel_encoder_t /* in */ *encoder);
@@ -1132,10 +1096,6 @@ sixel_decoder_new(
     sixel_decoder_t    /* out */ **ppdecoder,  /* decoder object to be created */
     sixel_allocator_t  /* in */  *allocator);  /* allocator, null if you use
                                                   default allocator */
-
-/* deprecated version of sixel_decoder_new() */
-SIXELAPI __attribute__((deprecated)) sixel_decoder_t *
-sixel_decoder_create(void);
 
 /* increase reference count of decoder object (thread-unsafe) */
 SIXELAPI void
