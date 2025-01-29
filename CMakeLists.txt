@@ -1,6 +1,6 @@
 set(Python_EXECUTABLE ".venv/Scripts/python.exe")
 cmake_minimum_required(VERSION 3.15...3.27)
-project(consgfx LANGUAGES CXX)
+project(consgfx LANGUAGES CXX C)
 
 # Try to import all Python components potentially needed by nanobind
 find_package(Python 3.8
@@ -15,12 +15,17 @@ nanobind_add_module(consgfx_ext
   STABLE_ABI
 
   src/consgfx_ext.cpp
-#   src/c/imgui/imgui.cpp
-#   src/c/imgui/imgui_demo.cpp
-#   src/c/imgui/imgui_draw.cpp
-#   src/c/imgui/imgui_tables.cpp
-#   src/c/imgui/imgui_widgets.cpp
+  libsixel/src/allocator.c
+  libsixel/src/dither.c
+  libsixel/src/output.c
+  libsixel/src/pixelformat.c
+  libsixel/src/quant.c
+  libsixel/src/status.c
+  libsixel/src/tosixel.c
 )
+
+target_include_directories(consgfx_ext PRIVATE ${CMAKE_SOURCE_DIR}/libsixel/build)
+target_include_directories(consgfx_ext PRIVATE ${CMAKE_SOURCE_DIR}/libsixel/build/include)
 
 nanobind_add_stub(
   consgfx_ext_stub
@@ -31,7 +36,6 @@ nanobind_add_stub(
   INCLUDE_PRIVATE
 )
 
-#include_directories(${CMAKE_SOURCE_DIR}/src/c/imgui)
 
 install(TARGETS consgfx_ext LIBRARY DESTINATION consgfx)
 install(FILES "${CMAKE_SOURCE_DIR}/src/consgfx/consgfx_ext.pyi" DESTINATION consgfx)
